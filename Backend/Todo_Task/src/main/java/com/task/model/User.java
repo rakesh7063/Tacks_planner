@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Entity
@@ -27,10 +24,14 @@ public class User {
     @Size(min = 1, max = 10, message = "Name must be between 1 and 10 characters")
     private String name;
 
+    @Column(unique = true)
     @NotNull(message = "Email is required")
     @Email(message = "Email must be valid")
     private String email;
-
+    @NotBlank(message = "Password cannot be blank")
+    @Size(min = 6, max = 12, message = "Password must be between 6 and 12 characters")
+    @Pattern(regexp =  "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{5,15}$",message = "password must contain atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit")
+    private String password;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @OneToMany(mappedBy = "assignee")
     private Set<Task> tasks;
