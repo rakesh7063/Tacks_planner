@@ -25,7 +25,7 @@ public class TaskDTO {
     private String type;
 
     @NotBlank(message = "Status is required")
-    private String status;
+    private Boolean status;
 
     private Long assigneeId;
 
