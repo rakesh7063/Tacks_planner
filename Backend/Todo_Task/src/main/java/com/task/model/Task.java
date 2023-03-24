@@ -36,7 +36,7 @@ private Long task_id;
     @Enumerated
     private Type type;
 
-
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Boolean status;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime time;

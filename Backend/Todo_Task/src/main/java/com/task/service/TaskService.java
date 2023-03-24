@@ -6,4 +6,6 @@ import com.task.model.Task;
 public interface TaskService {
     Task registerTask(Task task);
     Task updateTask(Task task) throws TaskNotFoundException;
+    Task deleteTask(Long id) throws TaskNotFoundException;
+
 }

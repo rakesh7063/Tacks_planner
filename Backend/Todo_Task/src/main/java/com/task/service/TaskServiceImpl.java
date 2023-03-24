@@ -24,4 +24,11 @@ public class TaskServiceImpl implements TaskService {
         taskDao.findById(task.getTask_id()).orElseThrow(()-> new TaskNotFoundException("Task not found with taskId "+ task.getTask_id()));
         return taskDao.save(task);
     }
+
+    @Override
+    public Task deleteTask(Long id) throws TaskNotFoundException {
+       Task exstingTask = taskDao.findById(id).orElseThrow(()-> new TaskNotFoundException("Task Not found with task_id "+id));
+       taskDao.delete(exstingTask);
+       return exstingTask;
+    }
 }
