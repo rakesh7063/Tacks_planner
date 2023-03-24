@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class CurrentSession {
     @Id
     @Column(unique = true)
-    private int userId;
+    private Long userId;
 
     private String uuid;
 
