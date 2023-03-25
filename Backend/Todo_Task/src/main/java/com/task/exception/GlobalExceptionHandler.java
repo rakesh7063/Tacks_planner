@@ -54,4 +54,13 @@ public class GlobalExceptionHandler {
 
 
     }
+    @ExceptionHandler(LogInException.class)
+    public ResponseEntity<MyErrorDetails> LogIntExceptionHandler(Exception re, WebRequest req){
+
+        MyErrorDetails err=new MyErrorDetails(LocalDateTime.now(),re.getMessage(),req.getDescription(false));
+
+        return new ResponseEntity<MyErrorDetails>(err,HttpStatus.BAD_REQUEST);
+
+
+    }
 }

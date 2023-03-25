@@ -2,6 +2,7 @@ package com.task.service;
 
 import com.task.exception.SprintNotFoundException;
 import com.task.model.Sprint;
+import com.task.repository.CurrentSessionDao;
 import com.task.repository.SprintDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ import java.util.Optional;
 public class SprintServiceImpl implements SprintService{
   @Autowired
    private SprintDao sprintDao;
+ @Autowired
+  private CurrentSessionDao currentUserDao;
     @Override
     public Sprint addSprint(Sprint sprint) throws SprintNotFoundException {
        Optional<Sprint> exitingSprint = sprintDao.findByName(sprint.getName());
