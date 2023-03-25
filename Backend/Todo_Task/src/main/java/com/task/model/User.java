@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,6 +34,9 @@ public class User {
     @Pattern(regexp =  "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#$@!%&*?])[A-Za-z\\d#$@!%&*?]{5,15}$",message = "password must contain atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit")
     private String password;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @OneToMany(mappedBy = "assignee")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "assignee")
     private Set<Task> tasks;
+
+    @OneToMany
+    private List<Sprint> sprints;
 }

@@ -5,10 +5,7 @@ import com.task.service.SprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,7 +16,7 @@ public class SprintController {
     private SprintService sprintService;
 
     @PostMapping("/addSprint")
-    ResponseEntity<Sprint> addSprintHandle(@Valid @RequestBody Sprint sprint){
-        return new ResponseEntity<>(sprintService.addSprint(sprint), HttpStatus.ACCEPTED);
+    ResponseEntity<Sprint> addSprintHandle(@Valid @RequestBody Sprint sprint, @RequestParam String key){
+        return new ResponseEntity<>(sprintService.addSprint(sprint,key), HttpStatus.ACCEPTED);
     }
 }

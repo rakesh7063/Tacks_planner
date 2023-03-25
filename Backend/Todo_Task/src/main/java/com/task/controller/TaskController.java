@@ -15,9 +15,9 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @PostMapping("/addTask")
-    ResponseEntity<Task> registerTaskHandle(@Valid @RequestBody Task task){
-        return new ResponseEntity<>(taskService.registerTask(task), HttpStatus.ACCEPTED);
+    @PostMapping("/addTask/{id}")
+    ResponseEntity<Task> registerTaskHandle(@Valid @RequestBody Task task,@PathVariable Long id){
+        return new ResponseEntity<>(taskService.registerTask(task,id), HttpStatus.ACCEPTED);
     }
     @PutMapping("/updateTask")
     ResponseEntity<Task> updateTaskHandle(@Valid @RequestBody Task task){

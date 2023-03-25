@@ -9,6 +9,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -30,8 +31,8 @@ public class Sprint {
     @NotNull(message = "Start date is required")
     private Date startDate;
     @NotNull(message = "End date is required")
-    private Date endDate;
+    private LocalDate endDate;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @OneToMany(mappedBy = "sprint")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "sprint")
     private Set<Task> tasks;
 }

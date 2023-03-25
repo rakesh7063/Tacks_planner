@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -39,13 +40,13 @@ private Long task_id;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Boolean status;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime time;
+    private LocalDate time;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "assignee_id")
     private User assignee;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sprint_id")
     private Sprint sprint;
 }

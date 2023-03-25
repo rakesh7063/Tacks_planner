@@ -5,5 +5,5 @@ import com.task.exception.SprintNotFoundException;
 import com.task.model.Sprint;
 
 public interface SprintService {
-    public Sprint addSprint(Sprint sprint) throws SprintNotFoundException, LogInException;
+    public Sprint addSprint(Sprint sprint, String key) throws SprintNotFoundException, LogInException;
 }

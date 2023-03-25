@@ -1,22 +1,45 @@
 package com.task.service;
 
+import com.task.exception.SprintNotFoundException;
 import com.task.exception.TaskNotFoundException;
+import com.task.model.Sprint;
 import com.task.model.Task;
+import com.task.repository.CurrentSessionDao;
+import com.task.repository.SprintDao;
 import com.task.repository.TaskDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
+
 import java.time.LocalDateTime;
+
+import java.util.Optional;
 
 @Service
 public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskDao taskDao;
+    @Autowired
+    private SprintDao sprintDao;
+
+
     @Override
-    public Task registerTask(Task task) {
-       task.setTime(LocalDateTime.now());
-       task.setStatus(false);
-       return taskDao.save(task);
+    public Task registerTask(Task task,Long sprintId) throws SprintNotFoundException {
+        Optional<Sprint> sprint = sprintDao.findById(sprintId);
+        if(sprint.isPresent()) {
+            task.setTime(LocalDate.now());
+
+
+            if(task.getTime().isBefore(sprint.get().getEndDate())) {
+                task.setStatus(false);
+                task.setSprint(sprint.get());
+                return taskDao.save(task);
+            }
+            else throw new SprintNotFoundException("Sprint time is over");
+        }
+        else throw new SprintNotFoundException("Sprint not found with sprintId "+ sprintId);
     }
 
     @Override

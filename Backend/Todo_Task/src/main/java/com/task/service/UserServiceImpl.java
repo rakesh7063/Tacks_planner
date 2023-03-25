@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
                 RandomString rs = new RandomString();
                 String key = rs.make(6);
                 CurrentSession newUser = new CurrentSession(existUser.getUser_id(), key, true, LocalDateTime.now());
+                currentUserDao.save(newUser);
                 return newUser.toString();
             } else throw new PersonNotFoundException("Incorrect Password!..");
 
